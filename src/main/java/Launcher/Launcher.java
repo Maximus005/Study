@@ -6,7 +6,7 @@ public class Launcher {
     A a = new A();
     a.isTrue(true);
 
-    System.out.println("smth msg");
+    System.out.println("smth");
   }
 
 }
