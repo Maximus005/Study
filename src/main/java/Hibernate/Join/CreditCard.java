@@ -1,17 +1,12 @@
-package Hibernate;
+package Hibernate.Join;
+
+import Hibernate.Join.BillingDetails;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "CREDIT_CARD")
-@AttributeOverride(
-    name = "owner",
-    column = @Column(name = "CC_OWNER", nullable = false))
 public class CreditCard extends BillingDetails {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private int id;
 
   @Column(name = "card_number")
   private int cardNumber;

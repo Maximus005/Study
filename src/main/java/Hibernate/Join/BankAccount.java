@@ -1,19 +1,12 @@
-package Hibernate;
+package Hibernate.Join;
 
-import lombok.Getter;
-import lombok.Setter;
+import Hibernate.Join.BillingDetails;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "BANK_ACCOUNT")
-@Setter
-@Getter
 public class BankAccount extends BillingDetails {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private int id;
 
   private int account;
 
@@ -23,6 +16,30 @@ public class BankAccount extends BillingDetails {
   private String swift;
 
   public BankAccount() {
+  }
+
+  public int getAccount() {
+    return account;
+  }
+
+  public void setAccount(int account) {
+    this.account = account;
+  }
+
+  public String getBankName() {
+    return bankName;
+  }
+
+  public void setBankName(String bankName) {
+    this.bankName = bankName;
+  }
+
+  public String getSwift() {
+    return swift;
+  }
+
+  public void setSwift(String swift) {
+    this.swift = swift;
   }
 
   @Override

@@ -1,8 +1,8 @@
-package Hibernate;
+package Hibernate.TablePerClass;
 
-import Hibernate.BankAccount;
-import Hibernate.CreditCard;
 import Hibernate.HibernateUtil;
+import Hibernate.TablePerClass.BankAccount;
+import Hibernate.TablePerClass.CreditCard;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,6 +19,7 @@ public class Main {
     creditCard.setExpMonth("Jan");
     creditCard.setExpYear("2017");
     creditCard.setOwner("Bill Gates");
+
     BankAccount bankAccount = new BankAccount();
     bankAccount.setAccount(111222333);
     bankAccount.setBankName("Goldman Sachs");

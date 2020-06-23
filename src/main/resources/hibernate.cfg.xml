@@ -17,9 +17,19 @@
     <property name="format_sql">true</property> <!-- Show SQL formatted -->
     <property name="hibernate.current_session_context_class">thread</property>
 
-    <mapping class="Hibernate.CreditCard"/>
-    <mapping class="Hibernate.BankAccount"/>
-    <mapping class="Hibernate.BillingDetails"/>
+
+    <mapping class="Hibernate.TablePerClass.CreditCard"/>
+    <mapping class="Hibernate.TablePerClass.BankAccount"/>
+    <mapping class="Hibernate.TablePerClass.BillingDetails"/>
+
+    <mapping class="Hibernate.Join.CreditCard"/>
+    <mapping class="Hibernate.Join.BankAccount"/>
+    <mapping class="Hibernate.Join.BillingDetails"/>
+    <mapping class="Hibernate.Join.Person"/>
+    <mapping class="Hibernate.Join.Phone"/>
+
+    <mapping class="Hibernate.Associations.Post"/>
+    <mapping class="Hibernate.Associations.PostComment"/>
 
   </session-factory>
 </hibernate-configuration>
