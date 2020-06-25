@@ -1,30 +1,17 @@
 package Hibernate.TablePerClass;
 
 import Hibernate.HibernateUtil;
-import Hibernate.TablePerClass.BankAccount;
-import Hibernate.TablePerClass.CreditCard;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import java.util.*;
+import java.util.concurrent.Future;
 
 
 public class Main {
 
   public static void main(String[] args) throws Exception {
 
-    CreditCard creditCard = new CreditCard();
-    creditCard.setCardNumber(44411111);
-    creditCard.setExpMonth("Jan");
-    creditCard.setExpYear("2017");
-    creditCard.setOwner("Bill Gates");
-
-    BankAccount bankAccount = new BankAccount();
-    bankAccount.setAccount(111222333);
-    bankAccount.setBankName("Goldman Sachs");
-    bankAccount.setSwift("GOLDUS33");
-    bankAccount.setOwner("Donald Trump");
 
     SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -33,27 +20,35 @@ public class Main {
     try {
       session = sessionFactory.getCurrentSession();
       transaction  = session.beginTransaction();
-      session.persist(creditCard);
-      session.persist(bankAccount);
+
+      Feedback feedback = new Feedback();
+      feedback.setName("feedback 1");
+
+      SimpleAnswer simpleAnswer = new SimpleAnswer();
+      simpleAnswer.setText("text simple answer");
+      simpleAnswer.setFeedback(feedback);
+
+      ChoiceAnswer choiceAnswer = new ChoiceAnswer();
+      choiceAnswer.setText("text choice answer");
+      choiceAnswer.setChoice("choice");
+      choiceAnswer.setFeedback(feedback);
+
+      Feedback feedback1 = feedback;
+      feedback1.getChoiceAnswers().add(choiceAnswer);
+      feedback1.getSimpleAnswers().add(simpleAnswer);
+
+//      session.persist(feedback1);
+//      session.persist(choiceAnswer);
+      Feedback feedback2 = session.get(Feedback.class, 4L);
+//      feedback2.getSimpleAnswers().size();
+//      feedback2.getChoiceAnswers().size();
+
+
       transaction.commit();
+      sessionFactory.close();
     } catch (Exception e) {
       transaction.rollback();
-      throw e;
-    }
-
-    Session session1;
-    Transaction transaction1 = null;
-    try {
-      session1 = sessionFactory.getCurrentSession();
-      transaction1  = session1.beginTransaction();
-      List billingDetails = session1.createQuery("select a from BillingDetails a").list();
-
-      for (int i = 0; i < billingDetails.size(); i++) {
-        System.out.println(billingDetails.get(i));
-      }
-
-    } catch (Exception e) {
-      transaction1.rollback();
+      sessionFactory.close();
       throw e;
     }
 

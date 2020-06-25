@@ -1,11 +1,19 @@
 package Hibernate.Join;
 
 import Hibernate.Join.BillingDetails;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Polymorphism;
+import org.hibernate.annotations.PolymorphismType;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "BANK_ACCOUNT")
+@Polymorphism(type = PolymorphismType.EXPLICIT)
+@Getter
+@Setter
 public class BankAccount extends BillingDetails {
 
   private int account;
@@ -15,32 +23,33 @@ public class BankAccount extends BillingDetails {
 
   private String swift;
 
-  public BankAccount() {
-  }
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "human_id")
+  Human human;
 
-  public int getAccount() {
-    return account;
-  }
-
-  public void setAccount(int account) {
-    this.account = account;
-  }
-
-  public String getBankName() {
-    return bankName;
-  }
-
-  public void setBankName(String bankName) {
-    this.bankName = bankName;
-  }
-
-  public String getSwift() {
-    return swift;
-  }
-
-  public void setSwift(String swift) {
-    this.swift = swift;
-  }
+//  public int getHuman() {
+//    return human;
+//  }
+//
+//  public void setHuman(int human) {
+//    this.human = human;
+//  }
+//
+//  public String getBankName() {
+//    return bankName;
+//  }
+//
+//  public void setBankName(String bankName) {
+//    this.bankName = bankName;
+//  }
+//
+//  public String getSwift() {
+//    return swift;
+//  }
+//
+//  public void setSwift(String swift) {
+//    this.swift = swift;
+//  }
 
   @Override
   public String toString() {
@@ -48,6 +57,8 @@ public class BankAccount extends BillingDetails {
         "account=" + account +
         ", bankName='" + bankName + '\'' +
         ", swift='" + swift + '\'' +
-        '}';
+        " , owner = " + getOwner() + '\n' +
+        " , id = " + getId();
   }
+
 }

@@ -1,10 +1,20 @@
 package Hibernate.Join;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Polymorphism;
+import org.hibernate.annotations.PolymorphismType;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "BILLING_DETAILS")
 @Inheritance(strategy = InheritanceType.JOINED)
+@Polymorphism(type = PolymorphismType.EXPLICIT)
+@Getter
+@Setter
+@ToString(of = {"id", "owner"})
 public class BillingDetails {
 
   @Id
@@ -12,6 +22,10 @@ public class BillingDetails {
   private int id;
 
   private String owner;
+
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinColumn(name = "human_id")
+  Human human;
 
   public BillingDetails() {
   }
@@ -28,11 +42,4 @@ public class BillingDetails {
     this.owner = owner;
   }
 
-  @Override
-  public String toString() {
-    return "BillingDetails{" +
-        "id=" + id +
-        ", owner='" + owner + '\'' +
-        '}';
-  }
 }

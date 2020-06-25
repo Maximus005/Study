@@ -1,10 +1,14 @@
 package Hibernate.Join;
 
 import Hibernate.HibernateUtil;
-import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 
 public class MainJoin {
@@ -18,7 +22,7 @@ public class MainJoin {
 //    creditCard.setOwner("nope");
 //
 //    BankAccount bankAccount = new BankAccount();
-//    bankAccount.setAccount(32);
+//    bankAccount.setHuman(32);
 //    bankAccount.setBankName("hmm");
 //    bankAccount.setSwift("fck");
 //    bankAccount.setOwner("opps");
@@ -68,8 +72,8 @@ public class MainJoin {
     Phone phone1 = new Phone("12111-11-22");
 
 //    phone.setPerson(person);
-    person.getPhoneList().add(phone);
-    person.getPhoneList().add(phone1);
+//    person.getPhoneList().add(phone);
+//    person.getPhoneList().add(phone1);
 
 //    person.addPhone(phone);
 
@@ -77,19 +81,37 @@ public class MainJoin {
       session = sessionFactory.openSession();
       transaction  = session.beginTransaction();
 
-      Person person1 = session.get(Person.class, 370);
+//      Person person1 = session.get(Person.class, 370);
 //      System.out.println(person1.getPhoneList().size());
 //      session.persist(person);
 //      session.persist(phone);
 
 //      session.flush();
-      session.delete(person1);
+
+      Human human = new Human();
+      human.setHumanName("human #1");
+
+      BankAccount bankAccount = new BankAccount();
+      bankAccount.setAccount(32);
+      bankAccount.setBankName("hmm");
+      bankAccount.setSwift("fck");
+      bankAccount.setOwner("opps");
+      bankAccount.setHuman(human);
+
+//      session.persist(bankAccount);
+
+//      Human human1 = session.get(Human.class, 382L);
+
+//      BillingDetails billingDetails = session.get(BillingDetails.class, 3);
+//      List list = session.createCriteria(BillingDetails.class).list();
+
+//      System.out.println("summary - " + list.size());
+
+//      System.out.println(human1.toString());
+
       transaction.commit();
 
-
-//      transaction.commit();
       sessionFactory.close();
-
     } catch (Exception e) {
       System.out.println("Exception !!!");
       System.out.println(e.toString());

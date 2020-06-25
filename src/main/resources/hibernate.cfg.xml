@@ -11,25 +11,34 @@
     <property name="connection.password">postgres</property> <!-- DB Password -->
 
     <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property> <!-- DB Dialect -->
-    <!-- <property name="hbm2ddl.auto">create-drop</property> <!- create / create-drop / update -> -->
+    <!--<property name="hbm2ddl.auto">create</property> <!- create / create-drop / update -->
 
     <property name="show_sql">true</property> <!-- Show SQL in console -->
     <property name="format_sql">true</property> <!-- Show SQL formatted -->
     <property name="hibernate.current_session_context_class">thread</property>
 
 
+    <!--
     <mapping class="Hibernate.TablePerClass.CreditCard"/>
     <mapping class="Hibernate.TablePerClass.BankAccount"/>
     <mapping class="Hibernate.TablePerClass.BillingDetails"/>
+    -->
 
+    <mapping class="Hibernate.TablePerClass.Feedback"/>
+    <mapping class="Hibernate.TablePerClass.SimpleAnswer"/>
+    <mapping class="Hibernate.TablePerClass.ChoiceAnswer"/>
+    <!--
     <mapping class="Hibernate.Join.CreditCard"/>
     <mapping class="Hibernate.Join.BankAccount"/>
     <mapping class="Hibernate.Join.BillingDetails"/>
     <mapping class="Hibernate.Join.Person"/>
     <mapping class="Hibernate.Join.Phone"/>
+    <mapping class="Hibernate.Join.Human"/>
 
     <mapping class="Hibernate.Associations.Post"/>
     <mapping class="Hibernate.Associations.PostComment"/>
+
+    -->
 
   </session-factory>
 </hibernate-configuration>

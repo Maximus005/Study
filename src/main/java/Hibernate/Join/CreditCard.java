@@ -1,10 +1,13 @@
 package Hibernate.Join;
 
 import Hibernate.Join.BillingDetails;
+import org.hibernate.annotations.Polymorphism;
+import org.hibernate.annotations.PolymorphismType;
 
 import javax.persistence.*;
 
 @Entity
+@Polymorphism(type = PolymorphismType.EXPLICIT)
 @Table(name = "CREDIT_CARD")
 public class CreditCard extends BillingDetails {
 
